@@ -1,3 +1,9 @@
+package br.imd.entidades;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
 /**
  * 
  * @author Clarissa Soares / Paulo Henrique Lopes
@@ -50,7 +56,12 @@ public class Pessoa {
 	}
 	
 	public int getIdade(){
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate nascimento = LocalDate.parse(this.dataNascimento,formato);
 		
+		Period periodo = Period.between(nascimento, LocalDate.now());
+		
+		return periodo.getYears();
 	}
 	
 }
