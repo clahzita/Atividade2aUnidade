@@ -60,19 +60,19 @@ public class Arvore{
 		}		
 	}
 	
-	 public Pessoa busca(String nome) {
-	        if (this.raiz == null) {
+	 public No busca(String nome) {
+	       if (this.raiz == null) {
 	            return null;
 	        } else {
 	            if (nome.equals(this.raiz.getPessoa().getNome())) {
-	                return this.raiz.getPessoa();
+	                return this.getRaiz();
 	            } else {
 	                if (nome.compareTo(this.raiz.getPessoa().getNome()) > 0) {
 	                    if (this.arvoreDireita == null) {
 	                        return null;
 	                    }
 	                    return this.arvoreDireita.busca(nome);
-	                }else if(nome.compareTo(this.raiz.getPessoa().getNome()) < 0){
+	                }else{
 	                    if (this.arvoreEsquerda == null) {
 	                        return null;
 	                    }
@@ -81,6 +81,24 @@ public class Arvore{
 	            }
 	        }
 	    }
+	 
+	 public No menorNo(Arvore a){
+		 No menor = this.getRaiz();
+		 if(menor == null){
+			 return null;
+		 }else{
+			 return (a.arvoreEsquerda.getRaiz() == null) ? menor : this.menorNo(a.getArvoreEsquerda());
+		 }
+	 }
+	 
+	 public No maiorNo(Arvore a){
+		 No maior = this.getRaiz();
+		 if(maior == null){
+			 return null;
+		 }else{
+			 return (a.arvoreDireita.getRaiz() == null) ? maior : this.maiorNo(a.getArvoreDireita());
+		 }
+	 }
 	
 	
 
