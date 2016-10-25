@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import br.imd.entidades.Pessoa;
+import br.imd.entidade.Pessoa;
 
 public class PessoaTest {
 	Pessoa pessoa = new Pessoa("Laura", "20/11/1988", "06570555499", "3333-9090");

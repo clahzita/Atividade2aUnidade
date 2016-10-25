@@ -60,28 +60,31 @@ public class Arvore{
 		}		
 	}
 	
-	 public Pessoa busca(String nome) {
+	 public No busca(String nome) {
 	        if (this.raiz == null) {
 	            return null;
 	        } else {
 	            if (nome.equals(this.raiz.getPessoa().getNome())) {
-	                return this.raiz.getPessoa();
+	                return this.getRaiz();
 	            } else {
 	                if (nome.compareTo(this.raiz.getPessoa().getNome()) > 0) {
 	                    if (this.arvoreDireita == null) {
 	                        return null;
 	                    }
 	                    return this.arvoreDireita.busca(nome);
-	                }else if(nome.compareTo(this.raiz.getPessoa().getNome()) < 0){
+	                }else{
 	                    if (this.arvoreEsquerda == null) {
 	                        return null;
 	                    }
 	                    return this.arvoreEsquerda.busca(nome);
-	                }
+	                	}
+	            	}
+	                
 	            }
 	        }
-	    }
+	        
+}
 	
 	
 
-}
+

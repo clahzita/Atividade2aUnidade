@@ -1,8 +1,14 @@
 package br.imd.entidade;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
 /**
- * 
+ * Classe para objetos do tipo Pessoa, em que serão contidos valores e métodos.
  * @author Clarissa Soares / Paulo Henrique Lopes
  * @version 1.0
+ * @since #20161025
  */
 public class Pessoa {
 	private String nome;
@@ -50,8 +56,17 @@ public class Pessoa {
 		this.telefone = telefone;
 	}
 	
+	/**
+	 * Calcula a idade da pessoa com base na data de nascimento.
+	 * @return a idade da pessoa em anos
+	 */
 	public int getIdade(){
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate nascimento = LocalDate.parse(this.dataNascimento,formato);
 		
+		Period periodo = Period.between(nascimento, LocalDate.now());
+		
+		return periodo.getYears();
 	}
 	
 }
