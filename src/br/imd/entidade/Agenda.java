@@ -24,7 +24,7 @@ public class Agenda {
 	 * @return posição na árvore que se encontra os dados
 	 */
 	public int buscaPessoa(String nome){
-		
+		return 0;
 	}
 	
 	/**
