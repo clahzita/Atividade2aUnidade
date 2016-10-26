@@ -111,6 +111,13 @@ public class Arvore {
 			}
 		}
 	}
+	
+	public int deepSearch(No no){
+		if (no.getPai() == null){
+			return 0;
+		}
+		return deepSearch(no.getPai())+1;
+	}
 
 	public No menorNo(Arvore a) {
 		No menor = this.getRaiz();
