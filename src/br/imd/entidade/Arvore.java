@@ -74,7 +74,7 @@ public class Arvore {
 			} else if (no.getPessoa().getNome().compareTo(this.getRaiz().getPessoa().getNome()) > 0) {
 				this.getArvoreDireita().remover(no);
 			} else {
-				// Aqui a mágica deve acontece 
+				// Aqui a mágica deve acontecer
 			}
 		}
 	}
