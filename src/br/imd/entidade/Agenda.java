@@ -1,15 +1,18 @@
 package br.imd.entidade;
 
 public class Agenda {
-	Arvore repositorio = new Arvore();
+	public static Arvore banco = new Arvore();
+	
+	
 	/**
 	 * Método adciona uma pessoa de contato na agenda.
 	 * @param pessoa pessoa a ser adcionada na agenda
 	 */
 	public void armazenaPessoa(Pessoa pessoa){
-		
+		banco.inserir(new No(pessoa));
 	}
 	
+
 	/**
 	 * Método remove uma pessoa de contato na agenda.
 	 * @param nome Nome da pessoa que deve ser excluída da agenda.
