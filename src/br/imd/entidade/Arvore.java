@@ -23,18 +23,30 @@ public class Arvore {
 	public void inserir(No no) {
 		if (this.raiz == null) {
 			this.raiz = no;
+			if (this.raiz.getParent() != null
+					&& this.raiz.getParent().getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
+				this.raiz.setValor(2 * this.raiz.getParent().getValor());
+			} else if (this.raiz.getParent() != null
+					&& this.raiz.getParent().getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
+				this.raiz.setValor(2 * this.raiz.getParent().getValor()+1);
+			}else{
+				this.raiz.setValor(1);
+			}
+
 		} else {
 			if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
 				if (this.raiz.getArvDireita() == null) {
 					this.raiz.setArvDireita(new Arvore());
 				}
 				no.setParent(this.raiz);
+
 				this.raiz.getArvDireita().inserir(no);
 			} else if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
 				if (this.raiz.getArvEsquerda() == null) {
 					this.raiz.setArvEsquerda(new Arvore());
 				}
 				no.setParent(this.raiz);
+
 				this.raiz.getArvEsquerda().inserir(no);
 			}
 		}
@@ -92,8 +104,7 @@ public class Arvore {
 			return null;
 		}
 	}
-	
-	// preciso testar isso
+
 	public int altura() {
 		if (this.getRaiz() == null) {
 			return -1; // altura da árvore vazia
