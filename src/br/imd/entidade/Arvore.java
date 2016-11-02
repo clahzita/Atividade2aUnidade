@@ -28,18 +28,19 @@ public class Arvore {
 				if (this.raiz.getArvDireita() == null) {
 					this.raiz.setArvDireita(new Arvore());
 				}
+				no.setParent(this.raiz);
 				this.raiz.getArvDireita().inserir(no);
 			} else if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
 				if (this.raiz.getArvEsquerda() == null) {
 					this.raiz.setArvEsquerda(new Arvore());
 				}
+				no.setParent(this.raiz);
 				this.raiz.getArvEsquerda().inserir(no);
 			}
 		}
 	}
 
 	public Arvore remover(No node) {
-
 		if (this.buscar(node) != null) {
 			ArrayList<No> arvoreEmArray = new ArrayList<No>();
 			this.inserirNoArray(arvoreEmArray);
@@ -47,15 +48,13 @@ public class Arvore {
 			System.out.println("Removendo: " + node.getPessoa().getNome());
 			for (No no : arvoreEmArray) {
 				if (no.getPessoa().getNome().compareTo(node.getPessoa().getNome()) != 0) {
+					no.setArvDireita(new Arvore());
+					no.setArvEsquerda(new Arvore());
 					aux.inserir(no);
-					System.out.println("Inseri "+no.getPessoa().getNome());
-				} else {
-					System.out.println("Gustavo nao foi inserido");
 				}
 			}
 			return aux;
 		} else {
-			System.out.println("Nó não encontrado");
 			return this;
 		}
 	}
