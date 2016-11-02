@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class Arvore {
 	private No raiz;
+	
 
 	public Arvore() {
+		
 	}
-
+	
 	public No getRaiz() {
 		return raiz;
 	}
@@ -15,6 +17,7 @@ public class Arvore {
 	public void setRaiz(No raiz) {
 		this.raiz = raiz;
 	}
+	
 
 	public boolean isEmpty() {
 		return (this.getRaiz() == null) ? true : false;
@@ -23,6 +26,7 @@ public class Arvore {
 	public void inserir(No no) {
 		if (this.raiz == null) {
 			this.raiz = no;
+			
 			if (this.raiz.getParent() != null
 					&& this.raiz.getParent().getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
 				this.raiz.setValor(2 * this.raiz.getParent().getValor());
@@ -33,7 +37,12 @@ public class Arvore {
 				this.raiz.setValor(1);
 			}
 
-		} else {
+		} else if(this.raiz.getPessoa().getNome().equals(no.getPessoa().getNome())){
+				this.raiz.setPessoa(no.getPessoa());
+			
+		
+		}		
+		else {
 			if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
 				if (this.raiz.getArvDireita() == null) {
 					this.raiz.setArvDireita(new Arvore());
