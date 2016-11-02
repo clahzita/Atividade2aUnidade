@@ -5,8 +5,26 @@ public class No {
 	private Pessoa pessoa;
 	private Arvore arvDireita;
 	private Arvore arvEsquerda;
+	private No parent;
+	private int valor;
 	
 
+
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
+	}
+
+	public No getParent() {
+		return parent;
+	}
+
+	public void setParent(No parent) {
+		this.parent = parent;
+	}
 
 	public No() {
 
