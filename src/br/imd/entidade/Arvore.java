@@ -1,164 +1,180 @@
 package br.imd.entidade;
 
-public class Arvore {
+import java.util.ArrayList;
 
+public class Arvore {
 	private No raiz;
-	private Arvore arvoreEsquerda;
-	private Arvore arvoreDireita;
 
 	public Arvore() {
-
-	}
-
-	public boolean isEmpty() {
-		return (this.getRaiz() == null) ? true : false;
 	}
 
 	public No getRaiz() {
 		return raiz;
 	}
 
-	public void setRaiz(No raiz, No pai) {
-		this.raiz.setPai(pai);
+	public void setRaiz(No raiz) {
 		this.raiz = raiz;
 	}
 
-	public Arvore getArvoreEsquerda() {
-		return arvoreEsquerda;
-	}
-
-	public void setArvoreEsquerda(Arvore arvoreEsquerda) {
-		this.arvoreEsquerda = arvoreEsquerda;
-	}
-
-	public Arvore getArvoreDireita() {
-		return arvoreDireita;
-	}
-
-	public void setArvoreDireita(Arvore arvoreDireita) {
-		this.arvoreDireita = arvoreDireita;
+	public boolean isEmpty() {
+		return (this.getRaiz() == null) ? true : false;
 	}
 
 	public void inserir(No no) {
 		if (this.raiz == null) {
 			this.raiz = no;
 		} else {
-			// "a".compareTo("b"); retorna um numero negativo, exemplo -1
-			// "a".compareTo("a"); retorna 0
-			// "b".compareTo("a"); retorna um numero positivo, exemplo 1
-			if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
-				if (this.getArvoreEsquerda() == null) {
-					this.setArvoreEsquerda(new Arvore());
+			if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
+				if (this.raiz.getArvDireita() == null) {
+					this.raiz.setArvDireita(new Arvore());
 				}
-				no.setPai(this.raiz);
-				this.getArvoreEsquerda().inserir(no);
-			} else if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
-				if (this.getArvoreDireita() == null) {
-					this.setArvoreDireita(new Arvore());
+				this.raiz.getArvDireita().inserir(no);
+			} else if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
+				if (this.raiz.getArvEsquerda() == null) {
+					this.raiz.setArvEsquerda(new Arvore());
 				}
-				no.setPai(this.raiz);
-				this.getArvoreDireita().inserir(no);
-			} else {
-				No raiz_aux = this.getRaiz().getPai();
-				this.setRaiz(no, raiz_aux);
+				this.raiz.getArvEsquerda().inserir(no);
 			}
 		}
 	}
-	//TODO remover o nozinho
-	public void remover(No no) {
-		if (this.raiz == null) {
-			System.out.println("Nó não existe"); // aqui pode ter Exceptions
-		} else {
-			if (no.getPessoa().getNome().compareTo(this.getRaiz().getPessoa().getNome()) < 0) {
-				this.getArvoreEsquerda().remover(no);
-			} else if (no.getPessoa().getNome().compareTo(this.getRaiz().getPessoa().getNome()) > 0) {
-				this.getArvoreDireita().remover(no);
-			} else {
-				// Aqui a mágica deve acontecer
+
+	public Arvore remover(No node) {
+
+		if (this.buscar(node) != null) {
+			ArrayList<No> arvoreEmArray = new ArrayList<No>();
+			this.inserirNoArray(arvoreEmArray);
+			Arvore aux = new Arvore();
+			System.out.println("Removendo: " + node.getPessoa().getNome());
+			for (No no : arvoreEmArray) {
+				if (no.getPessoa().getNome().compareTo(node.getPessoa().getNome()) != 0) {
+					aux.inserir(no);
+					System.out.println("Inseri "+no.getPessoa().getNome());
+				} else {
+					System.out.println("Gustavo nao foi inserido");
+				}
 			}
+			return aux;
+		} else {
+			System.out.println("Nó não encontrado");
+			return this;
+		}
+	}
+
+	public No buscar(No no) {
+		if (this.raiz == null) {
+			return null;
+		} else {
+			if (no.getPessoa().getNome().equals(this.raiz.getPessoa().getNome())) {
+				return this.getRaiz();
+			} else {
+				if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
+					if (this.raiz.getArvEsquerda() == null) {
+						return null;
+					}
+					return this.raiz.getArvEsquerda().buscar(no);
+				} else {
+					if (this.raiz.getArvDireita() == null) {
+						return null;
+					}
+					return this.raiz.getArvDireita().buscar(no);
+				}
+			}
+		}
+	}
+
+	public Arvore getSubArvore(No no) {
+		if (this.buscar(no) != null) {
+			Arvore arvRetorno = new Arvore();
+			arvRetorno.raiz = this.buscar(no);
+			return arvRetorno;
+		} else {
+			// aqui poderia ter uma exception
+			return null;
 		}
 	}
 
 	// Testar isso urgente ;)
-	public int altura(Arvore a) {
-		if (a.isEmpty()) {
+	public int altura() {
+		if (this.isEmpty()) {
 			return -1;
 		} else {
-			int alturaEsq = altura(a.arvoreEsquerda);
-			int alturaDir = altura(a.arvoreDireita);
+			int alturaEsq = this.raiz.getArvEsquerda().altura();
+			int alturaDir = this.raiz.getArvDireita().altura();
 			return (alturaEsq < alturaDir) ? alturaDir + 1 : alturaEsq + 1;
 		}
 	}
 
-	public No busca(String nome) {
-		if (this.raiz == null) {
-			return null;
-		} else {
-			if (nome.equals(this.raiz.getPessoa().getNome())) {
-				return this.getRaiz();
-			} else {
-				if (nome.compareTo(this.raiz.getPessoa().getNome()) > 0) {
-					if (this.arvoreDireita == null) {
-						return null;
-					}
-					return this.arvoreDireita.busca(nome);
-				} else {
-					if (this.arvoreEsquerda == null) {
-						return null;
-					}
-					return this.arvoreEsquerda.busca(nome);
-				}
-			}
-		}
-	}
-	
-	public int deepSearch(No no){
-		if (no.getPai() == null){
-			return 0;
-		}
-		return deepSearch(no.getPai())+1;
-	}
-
-	public No menorNo(Arvore a) {
+	public No menorNo() {
 		No menor = this.getRaiz();
 		if (menor == null) {
 			return null;
 		} else {
-			return (a.arvoreEsquerda.getRaiz() == null) ? menor : this.menorNo(a.getArvoreEsquerda());
+			return (this.raiz.getArvEsquerda().getRaiz() == null) ? menor : this.raiz.getArvEsquerda().menorNo();
 		}
 	}
 
-	public No maiorNo(Arvore a) {
+	public No maiorNo() {
 		No maior = this.getRaiz();
 		if (maior == null) {
 			return null;
 		} else {
-			return (a.arvoreDireita.getRaiz() == null) ? maior : this.maiorNo(a.getArvoreDireita());
+			return (this.raiz.getArvDireita().getRaiz() == null) ? maior : this.raiz.getArvDireita().maiorNo();
 		}
 	}
 
-	public void preOrder(Arvore arv) {
-		if (arv.getRaiz() != null) {
-			System.out.print(arv.getRaiz().getPessoa().getNome() + " ");
-			preOrder(arv.arvoreEsquerda);
-			preOrder(arv.arvoreDireita);
+	public void inserirNoArray(ArrayList<No> arvoreEmArray) {
+		if (this.raiz == null) {
+
+		}
+		arvoreEmArray.add(this.getRaiz());
+		if (this.raiz.getArvEsquerda() != null) {
+			this.raiz.getArvEsquerda().inserirNoArray(arvoreEmArray);
+		}
+		if (this.raiz.getArvDireita() != null) {
+			this.raiz.getArvDireita().inserirNoArray(arvoreEmArray);
+		}
+
+	}
+
+	public void preOrder() {
+		if (this.raiz == null) {
+			return;
+		}
+		System.out.println("Nome: " + this.raiz.getPessoa().getNome());
+		if (this.raiz.getArvEsquerda() != null) {
+			this.raiz.getArvEsquerda().preOrder();
+		}
+		if (this.raiz.getArvDireita() != null) {
+			this.raiz.getArvDireita().preOrder();
 		}
 	}
 
-	public void posOrder(Arvore arv) {
-		if (arv.getRaiz() != null) {
-			posOrder(arv.getArvoreEsquerda());
-			posOrder(arv.getArvoreDireita());
-			System.out.println(arv.getRaiz().getPessoa().getNome() + " ");
+	public void inOrder() {
+		if (this.raiz == null) {
+			return;
+		}
+
+		if (this.raiz.getArvEsquerda() != null) {
+			this.raiz.getArvEsquerda().inOrder();
+		}
+		System.out.println("Nome: " + this.raiz.getPessoa().getNome());
+		if (this.raiz.getArvDireita() != null) {
+			this.raiz.getArvDireita().inOrder();
 		}
 	}
 
-	public void inOrder(Arvore arv) {
-		if (arv.getRaiz() != null) {
-			inOrder(arv.getArvoreEsquerda());
-			System.out.println(arv.getRaiz().getPessoa().getNome() + " ");
-			inOrder(arv.getArvoreDireita());
+	public void posOrder() {
+		if (this.raiz == null) {
+			return;
 		}
+
+		if (this.raiz.getArvEsquerda() != null) {
+			this.raiz.getArvEsquerda().inOrder();
+		}
+		if (this.raiz.getArvDireita() != null) {
+			this.raiz.getArvDireita().inOrder();
+		}
+		System.out.println("Nome: " + this.raiz.getPessoa().getNome());
 	}
 
 }
