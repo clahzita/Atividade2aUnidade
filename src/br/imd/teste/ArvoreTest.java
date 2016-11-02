@@ -9,12 +9,12 @@ import org.junit.Test;
 import br.imd.entidade.*;
 
 public class ArvoreTest {
-	Pessoa pessoa = new Pessoa("Laura", "20/11/1988", "06570555499", "3333-9090");
-	Pessoa pessoa2 = new Pessoa("Bruno", "20/11/1978", "06570555499", "3333-9090");
-	Pessoa pessoa3 = new Pessoa("Gustavo", "20/11/1978", "06570555499", "3333-9090");
-	Pessoa pessoa4 = new Pessoa("Maria", "20/11/1978", "06570555499", "3333-9090");
-	Pessoa pessoa5 = new Pessoa("Julia", "20/11/1978", "06570555499", "3333-9090");
-	Pessoa patinho = new Pessoa("Paulo", "20/11/1978", "06570555499", "3333-9090");
+	Pessoa pessoa = new Pessoa("Laura", "20/11/1988", "06570453499", "3333-9090");
+	Pessoa pessoa2 = new Pessoa("Bruno", "20/11/1978", "06570453499", "3333-9090");
+	Pessoa pessoa3 = new Pessoa("Gustavo", "20/11/1978", "06570453499", "3333-9090");
+	Pessoa pessoa4 = new Pessoa("Maria", "20/11/1978", "06570453499", "3333-9090");
+	Pessoa pessoa5 = new Pessoa("Julia", "20/11/1978", "06570453499", "3333-9090");
+	Pessoa patinho = new Pessoa("Paulo", "20/11/1978", "06570453499", "3333-9090");
 	Arvore arvore = new Arvore();
 
 	@Test

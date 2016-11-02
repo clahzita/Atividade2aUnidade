@@ -11,7 +11,7 @@ import br.imd.exceptions.RemovePessoaException;
  */
 
 public class Agenda {
-	public static Arvore banco = new Arvore();
+	public Arvore banco = new Arvore();
 	
 	
 	/**
@@ -19,22 +19,28 @@ public class Agenda {
 	 * @param pessoa pessoa a ser adcionada na agenda
 	 */
 	public void armazenaPessoa(Pessoa pessoa){
-		banco.inserir(new No(pessoa));
+		if(pessoa != null){
+			banco.inserir(new No(pessoa));
+			System.out.println("Salvo com sucesso!");
+		}else{
+			System.out.println("Dados nulos.");
+		}
+		
+		
 	}
 	
 
 	/**
 	 * Método remove uma pessoa de contato na agenda.
-	 * @param nome Nome da pessoa que deve ser excluída da agenda.
+	 * @param pessoa1 Nome da pessoa que deve ser excluída da agenda.
 	 * @throws RemovePessoaException Ocorre quando o nome do contato a ser removido não foi encontrado na agenda.
 	 */
-	public void removePessoa(String nome) throws RemovePessoaException{
-		No aux = banco.busca(nome);
-		if(aux != null){
-			banco.remover(aux);
-		}else{
-			throw new RemovePessoaException(nome + " não encontrado na agenda. Remoção não pode ser relizada.");
-		}
+	public void removePessoa(String pessoa){
+		
+		No aux1 = new No(new Pessoa(pessoa, "x", "x", "x"));
+		
+		banco.remover(aux1);
+		
 		
 	}
 	
@@ -51,16 +57,22 @@ public class Agenda {
 	/**
 	 *  Método imprime os dados de todas as pessoas da agenda
 	 */
-	public void imprimeAgenda(Arvore arvore){
-				
+	public void imprimeAgenda(Arvore arvore){	
 		if (arvore.getRaiz() != null) {
-			imprimeAgenda(arvore.getArvoreEsquerda());
+			
+			if(arvore.getRaiz().getArvEsquerda() != null){
+				imprimeAgenda(arvore.getRaiz().getArvEsquerda());
+			}
+			
 			System.out.println("#####################");
 			Pessoa contato = arvore.getRaiz().getPessoa();
 			System.out.println("Nome: "+contato.getNome()+" Idade: "+contato.getIdade()+"/nCPF: "
 								+contato.getCpf()+"\nTel.: "+contato.getTelefone());
 			System.out.println("#####################");
-			imprimeAgenda(arvore.getArvoreDireita());
+			
+			if(arvore.getRaiz().getArvDireita() != null){
+				imprimeAgenda(arvore.getRaiz().getArvDireita());
+			}
 		}
 	}
 	
@@ -70,7 +82,9 @@ public class Agenda {
 	 * @throws ImprimePessoaException Ocorre quando o nome do contato a ser impresso não foi encontrado na agenda.
 	 */
 	public void imprimePessoa(String nome) throws ImprimePessoaException{
-		No aux = banco.busca(nome);
+		
+		No aux1 = new No(new Pessoa(nome, "x", "x", "x"));
+		No aux = banco.buscar(aux1);
 		if(aux != null){
 			System.out.println("#####################");
 			Pessoa contato = aux.getPessoa();
