@@ -40,7 +40,7 @@ public class Arvore {
 		}
 	}
 
-	public Arvore remover(No node) {
+	public void remover(No node) {
 		if (this.buscar(node) != null) {
 			ArrayList<No> arvoreEmArray = new ArrayList<No>();
 			this.inserirNoArray(arvoreEmArray);
@@ -50,12 +50,13 @@ public class Arvore {
 				if (no.getPessoa().getNome().compareTo(node.getPessoa().getNome()) != 0) {
 					no.setArvDireita(new Arvore());
 					no.setArvEsquerda(new Arvore());
+					no.setParent(null);
 					aux.inserir(no);
 				}
 			}
-			return aux;
+			this.setRaiz(aux.getRaiz());
 		} else {
-			return this;
+			System.out.println("Nó não existe na arvore");
 		}
 	}
 
@@ -91,16 +92,33 @@ public class Arvore {
 			return null;
 		}
 	}
-
-	// Testar isso urgente ;)
+	
+	// preciso testar isso
 	public int altura() {
-		if (this.isEmpty()) {
-			return -1;
+		if (this.getRaiz() == null) {
+			return -1; // altura da árvore vazia
 		} else {
-			int alturaEsq = this.raiz.getArvEsquerda().altura();
-			int alturaDir = this.raiz.getArvDireita().altura();
-			return (alturaEsq < alturaDir) ? alturaDir + 1 : alturaEsq + 1;
+			int he = this.raiz.getArvEsquerda().altura();
+			int hd = this.raiz.getArvDireita().altura();
+
+			if (he < hd) {
+				return hd + 1;
+			} else {
+				return he + 1;
+			}
 		}
+	}
+
+	public int profundidade(No no) {
+		int contador = 0;
+		if (this.buscar(no) != null) {
+			no = this.buscar(no);
+			while (no.getParent() != null) {
+				contador += 1;
+				no = no.getParent();
+			}
+		}
+		return contador;
 	}
 
 	public No menorNo() {
