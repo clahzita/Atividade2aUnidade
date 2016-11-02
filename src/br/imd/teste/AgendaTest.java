@@ -32,7 +32,6 @@ public class AgendaTest {
 		System.out.println("Inicio teste armazenaPessoa");
 		try {
 			agenda.armazenaPessoa(pessoa1);
-			agenda.armazenaPessoa(pessoa2);
 			agenda.armazenaPessoa(pessoa3);
 			agenda.armazenaPessoa(pessoa4);
 		} catch (ValoresNulosException e) {
@@ -59,7 +58,7 @@ public class AgendaTest {
 		
 		System.out.println("Fim teste armazenaPessoa");
 		
-		agenda.getBanco().posOrder();
+		
 		
 	}
 	
