@@ -1,26 +1,39 @@
 package br.imd.entidade;
 
 public class No {
-	
+
 	private Pessoa pessoa;
-	private No pai;
-	
+	private Arvore arvDireita;
+	private Arvore arvEsquerda;
 	
 
-	public No(Pessoa pessoa){
+
+	public No() {
+
+	}
+
+	public No(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
-	public No getPai() {
-		return pai;
+
+	public void verPessoa() {
+		System.out.println(pessoa.getNome());
 	}
 
-	public void setPai(No pai) {
-		this.pai = pai;
+	public Arvore getArvDireita() {
+		return arvDireita;
 	}
-	
-	public void verPessoa(){
-		System.out.println(pessoa.getNome());
+
+	public void setArvDireita(Arvore arvDireita) {
+		this.arvDireita = arvDireita;
+	}
+
+	public Arvore getArvEsquerda() {
+		return arvEsquerda;
+	}
+
+	public void setArvEsquerda(Arvore arvEsquerda) {
+		this.arvEsquerda = arvEsquerda;
 	}
 
 	public Pessoa getPessoa() {
@@ -31,4 +44,6 @@ public class No {
 		this.pessoa = pessoa;
 	}
 	
+	
+
 }
