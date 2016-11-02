@@ -43,12 +43,8 @@ public class ArvoreTest {
 		
 		
 		System.out.println("Arvore teste");
-		 
-			if(arvore.remover(new No(pessoa3)).buscar(new No(pessoa3)) !=null){
-				System.out.println("Achou: " +arvore.buscar(new No(pessoa3)).getPessoa().getNome());
-			}else{
-				System.out.println("Não tem");
-			}
+		 arvore.remover(new No(pessoa3)).preOrder();
+			
 		 
 		 
 	}
