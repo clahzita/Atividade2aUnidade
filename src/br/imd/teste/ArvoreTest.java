@@ -2,8 +2,9 @@ package br.imd.teste;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import org.junit.Test;
 
 import br.imd.entidade.*;
 
@@ -15,13 +16,12 @@ public class ArvoreTest {
 	Pessoa pessoa5 = new Pessoa("Julia", "20/11/1978", "06570555499", "3333-9090");
 	Pessoa patinho = new Pessoa("Paulo", "20/11/1978", "06570555499", "3333-9090");
 	Arvore arvore = new Arvore();
-	
 
 	@Test
 	public void test() {
 		Arvore arv2 = new Arvore();
 		System.out.println(arv2.getRaiz());
-		//assertEquals(true, arvore.isEmpty());
+		// assertEquals(true, arvore.isEmpty());
 		arvore.inserir(new No(pessoa));
 		arvore.preOrder();
 		arvore.inserir(new No(pessoa2));
@@ -35,18 +35,20 @@ public class ArvoreTest {
 		arvore.inOrder();
 		System.out.println("Pos");
 		arvore.posOrder();
-		if(arvore.buscar(new No(patinho)) !=null){
-			System.out.println("Achou: " +arvore.buscar(new No(patinho)).getPessoa().getNome());
-		}else{
+		if (arvore.buscar(new No(patinho)) != null) {
+			System.out.println("Achou: " + arvore.buscar(new No(patinho)).getPessoa().getNome());
+		} else {
 			System.out.println("Não tem");
 		}
 		
+		arvore.remover(new No(pessoa3));
+		arvore.preOrder();
+		arvore.inserir(new No(pessoa3));
 		
-		System.out.println("Arvore teste");
-		 arvore.remover(new No(pessoa3)).preOrder();
-			
-		 
-		 
+		System.out.println(arvore.buscar(new No(pessoa4)).getValor());
+		
+
+
 	}
 
 }
