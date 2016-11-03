@@ -8,8 +8,11 @@ public class No {
 	private No parent;
 	private int valor;
 	
-
-
+	
+	/**
+	* Metodo que retorna o valor(posição) de um nó em uma arvore
+	* @return valor int
+	**/
 	public int getValor() {
 		return valor;
 	}
@@ -17,7 +20,11 @@ public class No {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-
+	
+	/**
+	* Metodo que retorna o nó pai do nó atual
+	* @return parent
+	**/
 	public No getParent() {
 		return parent;
 	}
@@ -37,7 +44,11 @@ public class No {
 	public void verPessoa() {
 		System.out.println(pessoa.getNome());
 	}
-
+	
+	/**
+	* Metodo que retorna a subárvore a direita de um nó
+	* @return arvDireita Arvore
+	**/
 	public Arvore getArvDireita() {
 		return arvDireita;
 	}
@@ -46,6 +57,10 @@ public class No {
 		this.arvDireita = arvDireita;
 	}
 
+	/**
+	* Metodo que retorna a subárvore a esquerda de um nó
+	* @return arvEsquerda Arvore
+	**/
 	public Arvore getArvEsquerda() {
 		return arvEsquerda;
 	}
@@ -53,7 +68,11 @@ public class No {
 	public void setArvEsquerda(Arvore arvEsquerda) {
 		this.arvEsquerda = arvEsquerda;
 	}
-
+	
+	/**
+	* Metodo que retorna o conteudo de um No
+	* @return pessoa Pessoa
+	**/
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
