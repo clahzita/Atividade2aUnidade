@@ -2,23 +2,46 @@ package br.imd.entidade;
 
 import java.util.ArrayList;
 
+import br.imd.exceptions.NodeNotFoundedException;
+
+/**
+ * Classe para objetos do tipo Pessoa, em que serão contidos valores e métodos.
+ * 
+ * @author Clarissa Soares / Paulo Henrique Lopes
+ * @version 1.0
+ * @since #20161025
+ */
 public class Arvore {
 	private No raiz;
-	
 
 	public Arvore() {
-		
+
 	}
-	
+
+	/**
+	 * Método que retorna a raiz de uma dada árvore
+	 * 
+	 * @return raiz da arvore
+	 */
 	public No getRaiz() {
 		return raiz;
 	}
 
+	/**
+	 * Método que valora a raiz de uma árvore.
+	 * 
+	 * @param raiz
+	 */
 	public void setRaiz(No raiz) {
 		this.raiz = raiz;
 	}
-	
 
+	/**
+	 * Método que verifica se a raiz tem Pessoa.
+	 * 
+	 * @return true caso a raiz esteja disponível.
+	 * @return false caso a raiz esteja ocupada.
+	 */
 	public boolean isEmpty() {
 		return (this.getRaiz() == null) ? true : false;
 	}
@@ -26,29 +49,26 @@ public class Arvore {
 	public void inserir(No no) {
 		if (this.raiz == null) {
 			this.raiz = no;
-			
+			// valorando os nós
 			if (this.raiz.getParent() != null
 					&& this.raiz.getParent().getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
 				this.raiz.setValor(2 * this.raiz.getParent().getValor());
 			} else if (this.raiz.getParent() != null
 					&& this.raiz.getParent().getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
-				this.raiz.setValor(2 * this.raiz.getParent().getValor()+1);
-			}else{
+				this.raiz.setValor(2 * this.raiz.getParent().getValor() + 1);
+			} else {
 				this.raiz.setValor(1);
 			}
 
-		} else if(this.raiz.getPessoa().getNome().equals(no.getPessoa().getNome())){
-				this.raiz.setPessoa(no.getPessoa());
-			
-		
-		}		
-		else {
+		} else if (this.raiz.getPessoa().getNome().equals(no.getPessoa().getNome())) {
+			this.raiz.setPessoa(no.getPessoa());
+
+		} else {
 			if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) > 0) {
 				if (this.raiz.getArvDireita() == null) {
 					this.raiz.setArvDireita(new Arvore());
 				}
 				no.setParent(this.raiz);
-
 				this.raiz.getArvDireita().inserir(no);
 			} else if (no.getPessoa().getNome().compareTo(this.raiz.getPessoa().getNome()) < 0) {
 				if (this.raiz.getArvEsquerda() == null) {
@@ -61,7 +81,12 @@ public class Arvore {
 		}
 	}
 
-	public void remover(No node) {
+	/**
+	 * Metodo usado para remover um Nó da árvore.
+	 * 
+	 * @param node
+	 */
+	public void remover(No node) throws NodeNotFoundedException {
 		if (this.buscar(node) != null) {
 			ArrayList<No> arvoreEmArray = new ArrayList<No>();
 			this.inserirNoArray(arvoreEmArray);
@@ -77,10 +102,17 @@ public class Arvore {
 			}
 			this.setRaiz(aux.getRaiz());
 		} else {
-			System.out.println("Nó não existe na arvore");
+			throw new NodeNotFoundedException(node.getPessoa().getNome() + " não foi encontrado na arvore!");
+
 		}
 	}
 
+	/**
+	 * Metodo para buscar um No na arvore
+	 * 
+	 * @param no
+	 * @return no encontrado na arvore
+	 */
 	public No buscar(No no) {
 		if (this.raiz == null) {
 			return null;
@@ -103,6 +135,12 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Metodo para gerar uma subárvore
+	 * 
+	 * @param no
+	 * @return arvRetorno
+	 */
 	public Arvore getSubArvore(No no) {
 		if (this.buscar(no) != null) {
 			Arvore arvRetorno = new Arvore();
@@ -114,6 +152,12 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Retorna a altura da árvore
+	 * 
+	 * @return hd+1
+	 * @return he +1
+	 */
 	public int altura() {
 		if (this.getRaiz() == null) {
 			return -1; // altura da árvore vazia
@@ -129,6 +173,12 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Metodo para calcular a profundidade de um nó em uma arvore
+	 * 
+	 * @param no
+	 * @return contador
+	 */
 	public int profundidade(No no) {
 		int contador = 0;
 		if (this.buscar(no) != null) {
@@ -141,6 +191,11 @@ public class Arvore {
 		return contador;
 	}
 
+	/**
+	 * Método que retorna o menor valor na arvore
+	 * 
+	 * @return menor
+	 */
 	public No menorNo() {
 		No menor = this.getRaiz();
 		if (menor == null) {
@@ -150,6 +205,11 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Método que retorna o maior valor na árvore.
+	 * 
+	 * @return maior
+	 */
 	public No maiorNo() {
 		No maior = this.getRaiz();
 		if (maior == null) {
@@ -159,6 +219,11 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Método que transforma a árvore em array.
+	 * 
+	 * @param arvoreEmArray
+	 */
 	public void inserirNoArray(ArrayList<No> arvoreEmArray) {
 		if (this.raiz == null) {
 
@@ -173,6 +238,9 @@ public class Arvore {
 
 	}
 
+	/**
+	 * Método para imprimir a árvore em preordem dos elementos
+	 */
 	public void preOrder() {
 		if (this.raiz == null) {
 			return;
@@ -186,6 +254,9 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Método para imprimir a árvore em ordem dos elementos.
+	 */
 	public void inOrder() {
 		if (this.raiz == null) {
 			return;
@@ -200,6 +271,9 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Método para imprimir a árvore em pós ordem dos elementos.
+	 */
 	public void posOrder() {
 		if (this.raiz == null) {
 			return;

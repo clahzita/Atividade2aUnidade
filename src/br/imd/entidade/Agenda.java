@@ -1,6 +1,7 @@
 package br.imd.entidade;
 
 import br.imd.exceptions.BuscaPessoaException;
+import br.imd.exceptions.NodeNotFoundedException;
 import br.imd.exceptions.ValoresNulosException;
 
 /**
@@ -50,8 +51,12 @@ public class Agenda {
 	public void removePessoa(String pessoa){
 		
 		No aux1 = new No(new Pessoa(pessoa, "x", "x", "x"));
-		
-		banco.remover(aux1);
+		try {
+			banco.remover(aux1);
+		} catch (NodeNotFoundedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
@@ -59,16 +64,18 @@ public class Agenda {
 	/**
 	 * Método informa em que posição da agenda está a pessoa.
 	 * @param nome Nome da pessoa que está sendo buscado.
-	 * @return posição na árvore que se encontra os dados
 	 */
-	public void buscaPessoa(String nome){
+	public void buscaPessoa(String nome) throws NodeNotFoundedException{
 		No aux1 = new No(new Pessoa(nome, "x", "x", "x"));
 		
 		No encontrado = banco.buscar(aux1);
 		if(encontrado != null){
+			
 			System.out.println(nome + " encontrado!");
 		}else{
 			System.out.println(nome+" não foi encontrado na agenda!");
+			throw new NodeNotFoundedException(nome+" não foi encontrado na agenda");
+			
 		}
 		
 		
