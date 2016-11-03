@@ -65,15 +65,14 @@ public class Agenda {
 	 * Método informa em que posição da agenda está a pessoa.
 	 * @param nome Nome da pessoa que está sendo buscado.
 	 */
-	public void buscaPessoa(String nome) throws NodeNotFoundedException{
+	public int buscaPessoa(String nome) throws NodeNotFoundedException{
 		No aux1 = new No(new Pessoa(nome, "x", "x", "x"));
 		
 		No encontrado = banco.buscar(aux1);
 		if(encontrado != null){
 			
-			System.out.println(nome + " encontrado!");
+			return encontrado.getValor();
 		}else{
-			System.out.println(nome+" não foi encontrado na agenda!");
 			throw new NodeNotFoundedException(nome+" não foi encontrado na agenda");
 			
 		}
