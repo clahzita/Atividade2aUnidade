@@ -1,5 +1,12 @@
 package br.imd.entidade;
 
+/**
+ * Classe para objetos do tipo No, em que serão contidos valores e métodos inerentes.
+ * 
+ * @author Clarissa Soares / Paulo Henrique Lopes
+ * @version 1.0
+ * @since #20161025
+ */
 public class No {
 
 	private Pessoa pessoa;
