@@ -137,7 +137,6 @@ public class Arvore {
 
 	/**
 	 * Metodo para gerar uma subárvore
-	 * 
 	 * @param no
 	 * @return arvRetorno
 	 */
@@ -147,7 +146,7 @@ public class Arvore {
 			arvRetorno.raiz = this.buscar(no);
 			return arvRetorno;
 		} else {
-			// aqui poderia ter uma exception
+			
 			return null;
 		}
 	}
