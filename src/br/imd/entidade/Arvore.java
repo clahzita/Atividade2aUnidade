@@ -1,8 +1,11 @@
 package br.imd.entidade;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 
 import br.imd.exceptions.NodeNotFoundedException;
+import br.imd.exceptions.ValoresNulosException;
 
 /**
  * Classe para objetos do tipo Pessoa, em que serão contidos valores e métodos.
@@ -107,6 +110,25 @@ public class Arvore {
 		}
 	}
 
+	
+	/**
+	 * Metodo que imprime uma árvore em largura
+	 * @throws Exception
+	 */
+	public void listaProfundidade() throws Exception{
+		if (this.raiz == null) throw new ValoresNulosException("Nó vazio");
+	    Deque<No> fila = new ArrayDeque<>();
+	    fila.add(this.raiz);
+	    while (!fila.isEmpty()) {
+	        No atual = fila.removeFirst();
+	        if(atual != null){
+	        	System.out.println("Posição :"+atual.getValor() +" Nome: "+atual.getPessoa().getNome());
+		        if (atual.getArvEsquerda().getRaiz() != null) fila.add(atual.getArvEsquerda().getRaiz());
+		        if (atual.getArvDireita().getRaiz() != null) fila.add(atual.getArvDireita().getRaiz());
+	        }
+	        
+	    }
+	}
 	/**
 	 * Metodo para buscar um No na arvore
 	 * 
