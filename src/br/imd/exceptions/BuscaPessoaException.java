@@ -4,15 +4,15 @@
 package br.imd.exceptions;
 
 /**
- * Essa classe trata as exceções lançadas pelo método imprimePessoa(String nome) da classe Agenda
+ * Essa classe trata as exceções ocrridas quando na busca não encontra o valor pesquisado.
  * @author Clarissa Soares / Paulo Henrique Lopes
- * @version 1.2
+ * @version 1.0
  * @since #20161026
  */
 public class BuscaPessoaException extends Exception {
 	private String mensagem;
 	/**
-	 * Constroi uma exceção.
+	 * Constroi uma exceção quando a busca por pessoa não é encontrada.
 	 * @param msg Mensagem enviada pelo metodo que lança a exceção.
 	 */
 	public BuscaPessoaException(String msg){

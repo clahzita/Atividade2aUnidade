@@ -9,6 +9,12 @@ import org.junit.Test;
 import br.imd.entidade.*;
 import br.imd.exceptions.NodeNotFoundedException;
 
+/**
+ * TestCase da Classe Arvore
+ * @author Clarissa Soares / Paulo Henrique Lopes
+ * @version 1.0
+ * @since #20161102
+ */
 
 public class ArvoreTest {
 	Pessoa pessoa = new Pessoa("Laura", "20/11/1988", "06570453499", "3333-9090");

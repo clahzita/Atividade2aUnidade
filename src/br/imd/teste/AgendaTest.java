@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import br.imd.entidade.Pessoa;
 import br.imd.exceptions.BuscaPessoaException;
+import br.imd.exceptions.NodeNotFoundedException;
 import br.imd.exceptions.ValoresNulosException;
 import br.imd.entidade.Agenda;
 import br.imd.entidade.No;
@@ -73,11 +74,53 @@ public class AgendaTest {
 
 			System.out.println(e.getMessage());
 		}
+		
 		agenda.removePessoa(pessoa1.getNome());
+		assertEquals(true, agenda.getBanco().isEmpty());
+		
 		agenda.removePessoa(pessoa1.getNome());
+		
 		System.out.println("Fim teste removePessoa");
 		
 
 	}
+	
+	@Test
+	public void buscaPessoatest() {
+		System.out.println("Inicio teste buscaPessoa");
+		try {
+			agenda.armazenaPessoa(pessoa1);
+		} catch (ValoresNulosException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			agenda.armazenaPessoa(pessoa3);
+		} catch (ValoresNulosException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			assertEquals(1,agenda.buscaPessoa("Laura") );
+		} catch (NodeNotFoundedException e) {
+			System.out.println(e.getMensagem());
+		}
+		
+		try {
+			assertEquals(2,agenda.buscaPessoa("Gustavo") );
+		} catch (NodeNotFoundedException e) {
+			System.out.println(e.getMensagem());
+		}
+		
+		try {
+			agenda.buscaPessoa("Fernando");
+		} catch (NodeNotFoundedException e) {
+			System.out.println(e.getMensagem());
+		}
+		
+		System.out.println("Fim teste buscaPessoa");
+		
 
+	}
 }

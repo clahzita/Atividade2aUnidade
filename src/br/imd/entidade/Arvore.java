@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import br.imd.exceptions.NodeNotFoundedException;
 
 /**
- * Classe para objetos do tipo Pessoa, em que serão contidos valores e métodos.
+ * Classe para objetos do tipo Arvore, em que serão contidos valores e métodos pertinentes.
  * 
  * @author Clarissa Soares / Paulo Henrique Lopes
  * @version 1.0

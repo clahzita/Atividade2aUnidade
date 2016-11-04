@@ -4,9 +4,9 @@
 package br.imd.exceptions;
 
 /**
- * Essa classe trata as exceções lançadas pelo método removePessoa(String nome) da classe Agenda
+ * Essa classe trata as exceções ocrridas quando se tenta usar valores null para inserir elementos na Arvore.
  * @author Clarissa Soares / Paulo Henrique Lopes
- * @version 1.2
+ * @version 1.0
  * @since #20161027
  */
 public class ValoresNulosException extends Exception {
