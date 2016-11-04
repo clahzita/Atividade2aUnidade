@@ -61,6 +61,13 @@ public class ArvoreTest {
 		
 		// Verifica se removeu node da arvore
 		assertEquals(null, arvore.buscar(new No(pessoa3)));
+		try {
+			arvore.listaProfundidade();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
